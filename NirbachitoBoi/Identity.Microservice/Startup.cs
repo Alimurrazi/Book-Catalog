@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Books.Microservice
+namespace Identity.Microservice
 {
     public class Startup
     {
@@ -30,7 +30,7 @@ namespace Books.Microservice
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Books.Microservice", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Identity.Microservice", Version = "v1" });
             });
         }
 
@@ -41,7 +41,7 @@ namespace Books.Microservice
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Books.Microservice v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Identity.Microservice v1"));
             }
 
             app.UseHttpsRedirection();
