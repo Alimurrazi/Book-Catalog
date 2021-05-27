@@ -12,7 +12,7 @@ namespace Books.Microservice.Controllers
     public class BooksController : ControllerBase
     {
         private static readonly string[] Books = new[]
-{
+        {
             "Feluda somogro", "Hasuli baker upokotha"
         };
 
