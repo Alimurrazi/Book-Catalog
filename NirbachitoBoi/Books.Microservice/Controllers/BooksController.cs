@@ -35,6 +35,12 @@ namespace Books.Microservice.Controllers
             await endPoint.Send(book);
             return Ok(Books);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult>Delete()
+        {
+            return Ok("Hello");
+        }
     }
 
     public class Book
