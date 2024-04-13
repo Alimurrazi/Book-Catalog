@@ -1,5 +1,5 @@
 # BookStore
-Web API Project using .NET Core 3.1 and SPA project using Angular 9. Initial code base cloned from https://github.com/henriquesd/BookStore
+Web API Project using .NET Core 3.1 and SPA project using Angular 9. The initial code base fetched from https://github.com/henriquesd/BookStore
 
 ## Technologies
 - .NET Core 3.1
