@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BookStore.API.Dtos.Book
+namespace BookStore.Application.Dtos.Book
 {
     public class BookResultDto
     {

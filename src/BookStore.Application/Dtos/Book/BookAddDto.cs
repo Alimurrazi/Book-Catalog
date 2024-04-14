@@ -1,13 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.API.Dtos.Book
+namespace BookStore.Application.Dtos.Book
 {
-    public class BookEditDto
+    public class BookAddDto
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "The field {0} is required")]
         public int CategoryId { get; set; }
 

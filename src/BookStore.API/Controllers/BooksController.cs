@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using BookStore.API.Dtos.Book;
+using BookStore.Application.Dtos.Book;
 using BookStore.Domain.Interfaces;
 using BookStore.Domain.Models;
 using Microsoft.AspNetCore.Http;

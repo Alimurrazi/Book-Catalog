@@ -1,4 +1,4 @@
-﻿namespace BookStore.API.Dtos.Category
+﻿namespace BookStore.Application.Dtos.Category
 {
     public class CategoryResultDto
     {
