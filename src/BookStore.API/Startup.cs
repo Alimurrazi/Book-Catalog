@@ -1,5 +1,6 @@
 using AutoMapper;
 using BookStore.API.Configuration;
+using BookStore.Application.Configuration;
 using BookStore.Infrastructure.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +29,8 @@ namespace BookStore.API
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddAutoMapper(typeof(Startup));
+//            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutomapperConfig));
 
             services.AddControllers();
 
