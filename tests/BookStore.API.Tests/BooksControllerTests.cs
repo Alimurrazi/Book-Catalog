@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using AutoMapper;
 using BookStore.API.Controllers;
-using BookStore.API.Dtos.Book;
+using BookStore.Application.Dtos.Book;
 using BookStore.Domain.Interfaces;
 using BookStore.Domain.Models;
 using Microsoft.AspNetCore.Mvc;

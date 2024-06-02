@@ -1,4 +1,6 @@
-﻿using BookStore.Domain.Interfaces;
+﻿using BookStore.Application.Interfaces;
+using BookStore.Application.Services;
+using BookStore.Domain.Interfaces;
 using BookStore.Domain.Services;
 using BookStore.Infrastructure.Context;
 using BookStore.Infrastructure.Repositories;
@@ -17,6 +19,10 @@ namespace BookStore.API.Configuration
 
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBookService, BookService>();
+
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            
 
             return services;
         }

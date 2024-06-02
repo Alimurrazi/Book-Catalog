@@ -1,4 +1,5 @@
 ﻿using BookStore.Application.Dtos.Auth;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace BookStore.Application.Interfaces
 {
     public interface IAuthenticationService
     {
-        Task<string> Register(RegisterRequestDto request);
+        Task<IdentityResult> Register(RegisterRequestDto request);
     }
 }

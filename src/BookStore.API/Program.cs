@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BookStore.API.Configuration;
 using BookStore.Application.Configuration;
 using BookStore.Domain.Interfaces;
+using BookStore.Domain.Models;
 using BookStore.Infrastructure.Context;
 using BookStore.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,10 @@ namespace BookStore.API
             var configuration = builder.Configuration;
 
             builder.Services.AddDbContext<BookStoreDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("BookDbConnection")));
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<BookStoreDbContext>()
+                .AddDefaultTokenProviders();
+
 
             builder.Services.AddAutoMapper(typeof(AutomapperConfig));
             builder.Services.AddControllers();
