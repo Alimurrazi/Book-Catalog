@@ -14,8 +14,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.29" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.29" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.31" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.31" />
   </ItemGroup>
 
   <ItemGroup>

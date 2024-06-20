@@ -28,5 +28,18 @@ namespace BookStore.Application.Services
             signUpModel.Password = request.Password;
             return await authRepository.SignupAsync(signUpModel);
         }
+
+        public async Task<string> Login(LoginRequestDto request)
+        {
+            SignInModel signInModel = new SignInModel();
+            signInModel.Email = request.Email;
+            signInModel.Password = request.Password;
+            return await authRepository.SigninAsync(signInModel);
+        }
+
+        //public Task<string> Login(LoginRequestDto request)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

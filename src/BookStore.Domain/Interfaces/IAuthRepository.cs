@@ -11,5 +11,6 @@ namespace BookStore.Domain.Interfaces
     public interface IAuthRepository
     {
         Task<IdentityResult> SignupAsync(SignUpModel signUpModel);
+        Task<String> SigninAsync(SignInModel signinModel);
     }
 }

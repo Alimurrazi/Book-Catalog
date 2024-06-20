@@ -21,7 +21,7 @@ namespace BookStore.API.Controllers
             this.authenticationService = authenticationService;
         }
 
-        [HttpPost]
+        [HttpPost("signup")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -36,5 +36,19 @@ namespace BookStore.API.Controllers
 
             return Unauthorized();
         }
+
+        [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> Signin(LoginRequestDto loginRequestDto)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            var result = await authenticationService.Login(loginRequestDto);
+            if(string.IsNullOrWhiteSpace(result)) return Unauthorized();
+
+            return Ok(result);
+        }
+
     }
 }
