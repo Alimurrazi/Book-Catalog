@@ -4,6 +4,7 @@ using BookStore.Domain.Interfaces;
 using BookStore.Domain.Services;
 using BookStore.Infrastructure.Context;
 using BookStore.Infrastructure.Repositories;
+using BookStore.Infrastructure.Store;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookStore.API.Configuration
@@ -22,7 +23,9 @@ namespace BookStore.API.Configuration
 
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
-            
+
+            // added in-memory storage
+            services.AddSingleton<InMemoryTokenStore>();
 
             return services;
         }

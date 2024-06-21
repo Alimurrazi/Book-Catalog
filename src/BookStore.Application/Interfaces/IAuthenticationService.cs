@@ -11,6 +11,7 @@ namespace BookStore.Application.Interfaces
     public interface IAuthenticationService
     {
         Task<IdentityResult> Register(RegisterRequestDto request);
-        Task<String> Login(LoginRequestDto request);
+        Task<TokenResponseDto?> Login(LoginRequestDto request);
+        Task<TokenResponseDto?> Refresh(RefreshRequestDto request);
     }
 }

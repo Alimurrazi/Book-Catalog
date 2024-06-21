@@ -45,10 +45,20 @@ namespace BookStore.API.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
             var result = await authenticationService.Login(loginRequestDto);
-            if(string.IsNullOrWhiteSpace(result)) return Unauthorized();
+            if(result is null) return Unauthorized();
 
             return Ok(result);
         }
 
+        [HttpPost("refresh")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Refresh(RefreshRequestDto refreshRequestDto)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            var result = await authenticationService.Refresh(refreshRequestDto);
+            if (result is null) return Unauthorized();
+            return Ok(result);
+        }
     }
 }

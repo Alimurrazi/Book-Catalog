@@ -1,5 +1,6 @@
 ﻿using BookStore.Domain.Interfaces;
 using BookStore.Domain.Models;
+using BookStore.Infrastructure.Store;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -18,11 +19,13 @@ namespace BookStore.Infrastructure.Repositories
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signinManager;
         private readonly IConfiguration configuration;
-        public AuthRepository(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        private readonly InMemoryTokenStore inMemoryTokenStore;
+        public AuthRepository(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, InMemoryTokenStore inMemoryTokenStore)
         {
             this.userManager = userManager;
             this.signinManager = signInManager;
             this.configuration = configuration;
+            this.inMemoryTokenStore = inMemoryTokenStore;
         }
 
         public async Task<IdentityResult> SignupAsync(SignUpModel signUpModel)
@@ -39,6 +42,12 @@ namespace BookStore.Infrastructure.Repositories
         public async Task<User> GetUserAsync(string email)
         {
             var user = await userManager.FindByEmailAsync(email);
+            return user;
+        }
+
+        public async Task<User> GetUserByIdAsync(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
             return user;
         }
 
@@ -60,14 +69,8 @@ namespace BookStore.Infrastructure.Repositories
             return token;
         }
 
-        public async Task<string> SigninAsync(SignInModel signInModel)
+        public async Task<string> SigninAsync(User user, SignInModel signInModel)
         {
-            var user = await GetUserAsync(signInModel.Email);
-            if(user == null)
-            {
-                return null;
-            }
-
             var result = await signinManager.PasswordSignInAsync(user, signInModel.Password, true, false);
             if(!result.Succeeded)
             {
@@ -76,6 +79,22 @@ namespace BookStore.Infrastructure.Repositories
 
             var token = GetTokenPayload(signInModel);
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<StorageToken> GetRefreshToken(string token)
+        {
+            var refreshToken = await inMemoryTokenStore.GetRefreshTokenAsync(token);
+            return refreshToken;
+        }
+
+        public async Task RevokeRefreshToken(string token)
+        {
+            await inMemoryTokenStore.RevokeRefreshTokenAsync(token);
+        }
+
+        public async Task SaveRefreshToken(string userId, string token, DateTime expires)
+        {
+            await inMemoryTokenStore.SaveRefreshTokenAsync(userId, token, expires);
         }
 
     }
