@@ -36,13 +36,14 @@ namespace BookStore.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<string> SigninAsync(SignInModel signInModel)
+        public async Task<User> GetUserAsync(string email)
         {
-            var result = await signinManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, true, false);
-            if(!result.Succeeded)
-            {
-                return null;
-            }
+            var user = await userManager.FindByEmailAsync(email);
+            return user;
+        }
+
+        private JwtSecurityToken GetTokenPayload(SignInModel signInModel)
+        {
             var authClaims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, signInModel.Email),
@@ -56,6 +57,24 @@ namespace BookStore.Infrastructure.Repositories
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256Signature)
                 );
+            return token;
+        }
+
+        public async Task<string> SigninAsync(SignInModel signInModel)
+        {
+            var user = await GetUserAsync(signInModel.Email);
+            if(user == null)
+            {
+                return null;
+            }
+
+            var result = await signinManager.PasswordSignInAsync(user, signInModel.Password, true, false);
+            if(!result.Succeeded)
+            {
+                return null;
+            }
+
+            var token = GetTokenPayload(signInModel);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 

@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.Application.Dtos.Auth
+namespace BookStore.Domain.Models
 {
-    public class LoginRequestDto
+    public class TokenModel
     {
         [Required]
-        public string Email { get; set; } = string.Empty;
+        public string RefreshToken { get; set; } = string.Empty;
         [Required]
-        public string Password { get; set; } = string.Empty;
+        public string AccessToken { get; set; } = string.Empty;
     }
 }
